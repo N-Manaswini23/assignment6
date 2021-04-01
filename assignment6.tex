@@ -136,54 +136,103 @@ https://github.com/N-Manaswini23/assignment6/blob/main/assignment6.tex
 The variable $x$ takes a value between $0$ and $10$ with uniform probability distribution. The variable $y$ takes a value between $0$ and $20$ with uniform probability distribution.The probability that sum of variables $(x+y)$ being greater than $20$ is
 
 \section*{SOLUTION}
-Given variable $x$ takes a value between $0$ and $10$,Variable $y$ takes a value between $0$ and $20$ using uniform probability distribution.
-We know that probability distribution function of a variable $x \in \sbrak{a,b}$ is given as follows
+Let $X$ and $Y$ be two independent random variables. \\
+Let $Z$ be another random variable where $Z=X+Y$
+$X \in \sbrak{0,10}$,$Y \in \sbrak{0,20}$,$Z \in \sbrak{0,30}$
 \begin{align}
-f_{X}(x) = 
+\int_{0}^{10} p_X(x) \mathrm{dx} &=1  \\
+\therefore p_X(x)&=\frac{1}{10} \label{px}
+\end{align}
+The PDF for $X$ is
+\begin{align}
+p_X(x)  = 
 \begin{cases}
-\frac{1}{b-a} & a \le x \le b
-\\
-0 & otherwise
-\end{cases}\label{1}
+     \frac{1}{10} & 0 \leq x \leq 10\\
+     0 & otherwise \label{1}
+\end{cases}
 \end{align}
-
+Similarly,PDF for $Y$ is
 \begin{align}
-f_{X}(x) = 
+p_{Y}(y)  = 
 \begin{cases}
-\frac{1}{10} & 0 \le x \le 10
-\\
-0 & otherwise
-\end{cases}\label{2}
+     \frac{1}{20} & 0 \leq y \leq 20 \\
+      0 & otherwise \label{2}
+\end{cases}
 \end{align}
-
+$x=z-y$.Using this pdf of X can be written as
 \begin{align}
-f_{Y}(y) = 
+p_X(z-y)  = 
 \begin{cases}
-\frac{1}{20} & 0 \le y \le 20
-\\
-0 & otherwise
-\end{cases}\label{3}
+    \frac{1}{10} & 0 \leq z-y \leq 10\\
+    0 & otherwise \label{3}
+\end{cases}
 \end{align}
-
-
 \begin{align}
-\Pr(x+y\leq 20)&= \int_{x=0}^{10}\int_{y=0}^{20-x} f_Xf_y \mathrm{dy}\mathrm{dx} \label{4} \\
-&=\frac{1}{200}\int_{x=0}^{10}\int_{y=0}^{20-x}\mathrm{dy}\mathrm{dx} \label{5}
+   z-10 &\leq y \leq z \label{4} \\
+   0 &\leq y \leq 20 \label{5}
 \end{align}
-Solving \eqref{5} 
+pdf of $Z$ by convolution can be written as
 \begin{align}
-\Pr(x+y\leq 20)&=\frac{3}{4} \label{6}
+ p_Z(z) =  \int_{- \infty}^{\infty} p_X(z-y)p_Y(y) \mathrm{dy} \label{pz}
 \end{align}
-We need to find $\Pr(x+y>20)$
+From \ref{2} and \ref{3}
 \begin{align}
-\Pr(x+y>20)&=1-\Pr(x+y\leq 20)\\
-&=\frac{1}{4}\\
+ p_Z(z) = \frac{1}{200} \int_{- \infty}^{\infty} \mathrm{dy} \label{6}
+\end{align}
+For $0 \leq z \leq 10$  
+\begin{align}
+p_Z(z) &= \frac{1}{200}  \int_{0}^{z}\mathrm{dy}  \\
+       &= \frac{z}{200} \label{7}
+\end{align}
+For $ 10 < z \leq 20 $,
+\begin{align}
+p_Z(z) &= \frac{1}{200}  \int_{z-10}^{z}\mathrm{dy}  \\
+        &= \frac{1}{20} \label{8}
+\end{align}
+For $ 20 < z \leq 30 $,
+\begin{align}
+p_Z(z) &=\frac{1}{200}  \int_{z-10}^{20}\mathrm{dy}  \\
+       &= \frac{30-z}{200} \label{9}
+\end{align}
+$\therefore$ PDF of $Z$ is as follows
+\begin{align}
+p_{Z}(z)  = 
+\begin{cases}
+  \frac{z}{200}& 0 \leq z \leq 10 \\
+  \frac{1}{20} & 10 < z \leq 20 \\
+  \frac{30-z}{200} & 20 < z \leq 30 \\
+  0 & otherwise \label{10}
+\end{cases}
+\end{align}
+\begin{equation}
+F_Z(z) = \Pr(Z \leq z) \label{cdf}
+\end{equation}
+The CDF  of $Z$ is as follows:
+\begin{align}
+F_Z(z)  = 
+\begin{cases}
+0 & z < 0 \\
+  \frac{z^2}{400} &  z \leq 10 \\
+  \frac{z-5}{20} &  z \leq 20 \\
+  \frac{60z -500 -z^2}{400} & z \leq 30 \\
+  1 & z > 30 \label{11}
+\end{cases}
+\end{align}
+\begin{align}
+\Pr(z > 20)&= 1- F_Z(20) \\
+           &=\frac{1}{4} \label{12} \\
 \therefore \Pr(x+y>20)&=\frac{1}{4}=0.25
 \end{align}
+\begin{figure}[htb!]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{assignment6pdf.png}
+\end{center}
+\end{figure}
 
-\begin{lstlisting}
-     actual probability:0.25
-     simulated probability:  0.2499731
-\end{lstlisting}
+\begin{figure}[htb!]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{assignment6cdf.png}
+\end{center}
+\end{figure}
 
 \end{document}
