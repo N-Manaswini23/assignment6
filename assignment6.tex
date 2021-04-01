@@ -136,22 +136,48 @@ https://github.com/N-Manaswini23/assignment6/blob/main/assignment6.tex
 The variable $x$ takes a value between $0$ and $10$ with uniform probability distribution. The variable $y$ takes a value between $0$ and $20$ with uniform probability distribution.The probability that sum of variables $(x+y)$ being greater than $20$ is
 
 \section*{SOLUTION}
-Given variable $x$ takes a value between $0$ and $10$.\\
-Variable $y$ takes a value between $0$ and $20$.
-
-
-\begin{figure}[htb!]
-\begin{center}
-\includegraphics[width=1\columnwidth]{assignment6.png}
-\end{center}
-\caption{Graph}
-\label{graph:1}
-\end{figure}
-
-From graph \eqref{graph:1}
+Given variable $x$ takes a value between $0$ and $10$,Variable $y$ takes a value between $0$ and $20$ using uniform probability distribution.
+We know that probability distribution function of a variable $x \in \sbrak{a,b}$ is given as follows
 \begin{align}
-\Pr(x+y>20)&=\frac{\mbox{Area of shaded region}}{\mbox{Area of rectangle}} \label{1} \\
-&=\frac{\frac{1}{2}\times 10 \times 10}{10 \times 20} \\
+f_{X}(x) = 
+\begin{cases}
+\frac{1}{b-a} & a \le x \le b
+\\
+0 & otherwise
+\end{cases}\label{1}
+\end{align}
+
+\begin{align}
+f_{X}(x) = 
+\begin{cases}
+\frac{1}{10} & 0 \le x \le 10
+\\
+0 & otherwise
+\end{cases}\label{2}
+\end{align}
+
+\begin{align}
+f_{Y}(y) = 
+\begin{cases}
+\frac{1}{20} & 0 \le y \le 20
+\\
+0 & otherwise
+\end{cases}\label{3}
+\end{align}
+
+
+\begin{align}
+\Pr(x+y\leq 20)&= \int_{x=0}^{10}\int_{y=0}^{20-x} f_Xf_y \mathrm{dy}\mathrm{dx} \label{4} \\
+&=\frac{1}{200}\int_{x=0}^{10}\int_{y=0}^{20-x}\mathrm{dy}\mathrm{dx} \label{5}
+\end{align}
+Solving \eqref{5} 
+\begin{align}
+\Pr(x+y\leq 20)&=\frac{3}{4} \label{6}
+\end{align}
+We need to find $\Pr(x+y>20)$
+\begin{align}
+\Pr(x+y>20)&=1-\Pr(x+y\leq 20)\\
+&=\frac{1}{4}\\
 \therefore \Pr(x+y>20)&=\frac{1}{4}=0.25
 \end{align}
 
